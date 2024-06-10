@@ -6,4 +6,10 @@ const getHeroes = async (): Promise<Hero[]> => {
   return data;
 };
 
-export { getHeroes };
+const getHeroesByLetter = async (letter: string): Promise<Hero[]> => {
+  const response = await fetch(`http://localhost:4000/heroes?name_like=^${letter}`);
+  const data = await response.json();
+  return data;
+};
+
+export { getHeroes, getHeroesByLetter };
