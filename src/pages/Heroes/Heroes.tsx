@@ -1,18 +1,26 @@
-const fetchHeroes = async (): Promise<{id: number, name: string}> => {
-    const response = await fetch('http://localhost:4000/heroes')
-    const data = await response.json()
-    return data
-}
+import { useEffect, useState } from 'react';
+import { Hero } from '../../types/hero';
+import { getHeroes } from '../../api/heroes';
 
 const Heroes = () => {
-    return (
-        <section>
-            <h1>Heroes</h1>
-            <ul>
-                <li>id - name</li>
-            </ul>
-        </section>
-    )
-}
+  const [heroes, setHeroes] = useState<Hero[]>([]);
+  useEffect(() => {
+    getHeroes().then((data) => {
+      setHeroes(data);
+    });
+  }, []);
+  return (
+    <section>
+      <h1>Heroes</h1>
+      <ul>
+        {heroes.map((hero) => (
+          <li key={hero.id}>
+            {hero.id} - {hero.name}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+};
 
-export default Heroes
+export default Heroes;
