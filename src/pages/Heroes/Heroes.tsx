@@ -32,7 +32,7 @@ const Heroes = () => {
   return (
     <section>
       <h1 className='text-center'>Heroes</h1>
-      <ul className='flex justify-center gap-2'>
+      <ul className='flex justify-center gap-2 my-4'>
         {arrayOfLetters.map((letter) => (
           <LetterListElement
             key={letter}
@@ -42,7 +42,6 @@ const Heroes = () => {
           </LetterListElement>
         ))}
       </ul>
-      <p>You clicked on letter: {selectedLetter}</p>
       {isLoading && <Loader />}
       <ul className='flex flex-wrap justify-center gap-4'>
         {heroes.map((hero) => (

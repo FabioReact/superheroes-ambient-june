@@ -1,9 +1,9 @@
-import classNames from './loader.module.css'
+import classNames from './loader.module.css';
 
 export function Loader() {
-    return (
-        <div>
-            <div className={classNames.loader}></div>
-        </div>
-    )
+  return (
+    <div className='text-center'>
+      <div className={classNames.loader}></div>
+    </div>
+  );
 }
