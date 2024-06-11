@@ -22,17 +22,15 @@ const Heroes = () => {
 
   useEffect(() => {
     const controller = new AbortController();
-    getHeroesByLetter('a', { signal: controller.signal })
-      .then((data) => {
-        setHeroes(data);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    getHeroesByLetter('a', { signal: controller.signal }).then((data) => {
+      setHeroes(data);
+      setIsLoading(false);
+    });
     return () => {
       controller.abort();
     };
   }, []);
+
   return (
     <section>
       <h1 className='text-center'>Heroes</h1>
