@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Hero } from '../../types/hero';
 import { getHeroesByLetter } from '../../api/heroes';
 import { Loader } from '../../components/Loader/Loader';
 import HeroCard from '../../components/HeroCard/HeroCard';
 import LetterListElement from './LetterListElement';
 import { arrayOfLetters } from './utils';
+import { Hero } from '../../types/hero';
 
 const Heroes = () => {
   const [selectedLetter, setSelectedLetter] = useState('a');
@@ -21,13 +21,17 @@ const Heroes = () => {
   };
 
   useEffect(() => {
-    getHeroesByLetter('a')
+    const controller = new AbortController();
+    getHeroesByLetter('a', { signal: controller.signal })
       .then((data) => {
         setHeroes(data);
       })
       .finally(() => {
         setIsLoading(false);
       });
+    return () => {
+      controller.abort();
+    };
   }, []);
   return (
     <section>
@@ -45,7 +49,7 @@ const Heroes = () => {
       {isLoading && <Loader />}
       <ul className='flex flex-wrap justify-center gap-4'>
         {heroes.map((hero) => (
-          <li>
+          <li key={hero.id}>
             <HeroCard hero={hero} />
           </li>
         ))}
