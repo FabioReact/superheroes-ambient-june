@@ -5,6 +5,7 @@ import Search from './pages/Search/Search';
 import { UseEffectComponent } from './pages/UseEffect/UseEffect';
 import Register from './pages/Register/Register';
 import Login from '@pages/Login/Login';
+import Profile from '@pages/Profile/Profile';
 
 // const router = createBrowserRouter([
 //   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       <Route path='heroes' element={<Heroes />} />
       <Route path='register' element={<Register />} />
       <Route path='login' element={<Login />} />
+      <Route path='profile' element={<Profile />} />
       <Route path='useeffect' element={<UseEffectComponent />} />
       <Route path='*' element={<div>Oops, you took a wrong turn...</div>} />
     </Route>,
