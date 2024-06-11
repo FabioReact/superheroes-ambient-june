@@ -4,6 +4,16 @@
       "email": "fabio@email.com",
       "password": "$2a$10$HoUV.LtnHaIFRqmCaxys0OqBFgN1SFKkHyuiofVSRRYI4dMp/BB9m",
       "id": 1
+    },
+    {
+      "email": "jules@email.com",
+      "password": "$2a$10$CLhWmq8SSlgrd6mTcRIGOetQgpPqLXzygvDSlMuUjS3m15AmWQJM.",
+      "id": 2
+    },
+    {
+      "email": "julie@gmail.com",
+      "password": "$2a$10$aave1vWjGUwryPsFjKuWNeL6t1hB9wP/rBKnj.t6fhORPeZ1iXpNe",
+      "id": 3
     }
   ],
   "heroes": [

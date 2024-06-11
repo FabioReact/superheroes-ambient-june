@@ -1,4 +1,7 @@
+import { loginUser } from '@api/auth';
+import { useAuthContext } from '@context/auth-context';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
 const schema = z.object({
@@ -9,10 +12,18 @@ const schema = z.object({
 type Inputs = z.infer<typeof schema>;
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { onAuthenticate } = useAuthContext();
   const { register, handleSubmit } = useForm<Inputs>();
-  const onSubmitHandler: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
+
+  const onSubmitHandler: SubmitHandler<Inputs> = async ({ email, password }) => {
+    const { accessToken, user } = await loginUser(email, password);
+    onAuthenticate(accessToken, user);
+    navigate(from, { replace: true });
   };
+
   return (
     <section>
       <h1>Login</h1>

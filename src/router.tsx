@@ -6,6 +6,8 @@ import { UseEffectComponent } from './pages/UseEffect/UseEffect';
 import Register from './pages/Register/Register';
 import Login from '@pages/Login/Login';
 import Profile from '@pages/Profile/Profile';
+import PrivateRoute from './hoc/PrivateRoute/PrivateRoute';
+import Logout from '@components/Logout/Logout';
 
 // const router = createBrowserRouter([
 //   {
@@ -31,7 +33,10 @@ const router = createBrowserRouter(
       <Route path='heroes' element={<Heroes />} />
       <Route path='register' element={<Register />} />
       <Route path='login' element={<Login />} />
-      <Route path='profile' element={<Profile />} />
+      <Route path='logout' element={<Logout />} />
+      <Route element={<PrivateRoute />}>
+        <Route path='profile' element={<Profile />} />
+      </Route>
       <Route path='useeffect' element={<UseEffectComponent />} />
       <Route path='*' element={<div>Oops, you took a wrong turn...</div>} />
     </Route>,

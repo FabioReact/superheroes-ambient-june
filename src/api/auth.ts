@@ -24,4 +24,15 @@ const registerUser = async (email: string, password: string) => {
   return response.data;
 };
 
-export { registerUser };
+const loginUser = async (email: string, password: string) => {
+  const response = await axios.post<RegisterUserBody, AxiosResponse<RegisterUserRepsonse>>(
+    'http://localhost:4000/login',
+    {
+      email,
+      password,
+    },
+  );
+  return response.data;
+};
+
+export { registerUser, loginUser };

@@ -17,3 +17,8 @@ h1 {
     letter-spacing: .125rem;
     margin: 1rem 0;
 }
+
+input {
+    border-bottom: 1px solid black;
+    background-color: transparent;
+}

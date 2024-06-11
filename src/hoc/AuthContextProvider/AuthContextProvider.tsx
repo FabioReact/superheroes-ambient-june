@@ -17,12 +17,19 @@ const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     setUser(user);
   };
 
+  const onLogout = () => {
+    setConnected(false);
+    setAccessToken(null);
+    setUser({ email: null, id: null });
+  };
+
   const authContextValues = {
     accessToken,
     connected,
     email: user.email,
     id: user.id,
     onAuthenticate,
+    onLogout,
   };
   return <AuthContext.Provider value={authContextValues}>{children}</AuthContext.Provider>;
 };

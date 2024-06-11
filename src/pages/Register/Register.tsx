@@ -2,6 +2,7 @@ import { registerUser } from '@api/auth';
 import { useAuthContext } from '@context/auth-context';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
 const schema = z
@@ -24,10 +25,12 @@ const Register = () => {
     formState: { errors },
   } = useForm<Inputs>({ resolver: zodResolver(schema) });
   const { onAuthenticate } = useAuthContext();
+  const navigate = useNavigate()
 
   const onSubmitHandler: SubmitHandler<Inputs> = async ({ email, password }) => {
     const data = await registerUser(email, password);
     onAuthenticate(data.accessToken, data.user);
+    navigate('/profile');
   };
 
   return (
