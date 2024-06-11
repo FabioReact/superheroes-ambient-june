@@ -3,6 +3,7 @@ import Heroes from './pages/Heroes/Heroes';
 import Layout from './hoc/Layout/Layout';
 import Search from './pages/Search/Search';
 import { UseEffectComponent } from './pages/UseEffect/UseEffect';
+import Register from './pages/Register/Register';
 
 // const router = createBrowserRouter([
 //   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
       <Route path='/' element={<div>Home</div>} />
       <Route path='search' element={<Search />} />
       <Route path='heroes' element={<Heroes />} />
+      <Route path='register' element={<Register />} />
       <Route path='useeffect' element={<UseEffectComponent />} />
       <Route path='*' element={<div>Oops, you took a wrong turn...</div>} />
     </Route>,
