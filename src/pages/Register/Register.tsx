@@ -2,12 +2,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-// type Inputs = {
-//   email: string;
-//   password: string;
-//   passwordConfirmation: string;
-// };
-
 const schema = z
   .object({
     email: z.string().email('Not a valid').min(8, 'Email shoud be at least 8 characters long'),
@@ -43,14 +37,14 @@ const Register = () => {
         </fieldset>
         <fieldset>
           <label htmlFor='password'>Password:</label>
-          <input type='text' id='password' {...register('password')} />
+          <input type='password' id='password' {...register('password')} />
           {errors.password && (
             <p className='text-xs text-red-500'>Message: {errors.password.message}</p>
           )}
         </fieldset>
         <fieldset>
           <label htmlFor='passwordConfirmation'>Confirm Password:</label>
-          <input type='text' id='passwordConfirmation' {...register('passwordConfirmation')} />
+          <input type='password' id='passwordConfirmation' {...register('passwordConfirmation')} />
           {errors.passwordConfirmation && (
             <p className='text-xs text-red-500'>Message: {errors.passwordConfirmation.message}</p>
           )}

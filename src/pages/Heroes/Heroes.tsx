@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { getHeroesByLetter } from '@api/heroes';
-import { Loader } from '@components/Loader/Loader';
-import HeroCard from '@components/HeroCard/HeroCard';
+import { Loader } from '../../components/Loader/Loader';
+import HeroCard from '../../components/HeroCard/HeroCard';
 import LetterListElement from './LetterListElement';
 import { arrayOfLetters } from './utils';
-import { Hero } from 'types/hero';
+import { Hero } from '../../types/hero';
 
 const Heroes = () => {
   const [selectedLetter, setSelectedLetter] = useState('a');
