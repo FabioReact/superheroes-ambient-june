@@ -1,35 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { getHeroesByLetter } from '@api/heroes';
 import { Loader } from '../../components/Loader/Loader';
 import HeroCard from '../../components/HeroCard/HeroCard';
 import LetterListElement from './LetterListElement';
 import { arrayOfLetters } from './utils';
-import { Hero } from '../../types/hero';
+import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 
 const Heroes = () => {
   const [selectedLetter, setSelectedLetter] = useState('a');
-  const [heroes, setHeroes] = useState<Hero[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const {
+    data: heroes,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ['getHeroesByLetter', selectedLetter],
+    queryFn: () => getHeroesByLetter(selectedLetter),
+  });
 
   const onSelectLetter = async (letter: string) => {
-    setHeroes([]);
-    setIsLoading(true);
     setSelectedLetter(letter);
-    const data = await getHeroesByLetter(letter);
-    setIsLoading(false);
-    setHeroes(data);
+    refetch();
   };
-
-  useEffect(() => {
-    const controller = new AbortController();
-    getHeroesByLetter('a', { signal: controller.signal }).then((data) => {
-      setHeroes(data);
-      setIsLoading(false);
-    });
-    return () => {
-      controller.abort();
-    };
-  }, []);
 
   return (
     <section>
@@ -46,9 +38,11 @@ const Heroes = () => {
       </ul>
       {isLoading && <Loader />}
       <ul className='flex flex-wrap justify-center gap-4'>
-        {heroes.map((hero) => (
+        {heroes?.map((hero) => (
           <li key={hero.id}>
-            <HeroCard hero={hero} />
+            <Link to={`${hero.id}`}>
+              <HeroCard hero={hero} />
+            </Link>
           </li>
         ))}
       </ul>
