@@ -9,7 +9,7 @@ import Login from '@pages/Login/Login';
 import Profile from '@pages/Profile/Profile';
 import PrivateRoute from './hoc/PrivateRoute/PrivateRoute';
 import Logout from '@components/Logout/Logout';
-import HeroById from '@pages/HeroById/HeroById';
+import HeroById, { loader } from '@pages/HeroById/HeroById';
 import AddHero from '@pages/AddHero/AddHero';
 
 const Counter = lazy(() => import('@pages/Counter/Counter'));
@@ -38,7 +38,7 @@ const router = createBrowserRouter(
       <Route path='search' element={<Search />} />
       <Route path='heroes'>
         <Route path='' element={<Heroes />} />
-        <Route path=':id' element={<HeroById />} />
+        <Route path=':id' element={<HeroById />} loader={loader} />
       </Route>
       <Route path='register' element={<Register />} />
       <Route path='login' element={<Login />} />
