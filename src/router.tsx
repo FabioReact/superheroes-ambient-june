@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { lazy } from 'react';
 import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-import Heroes from './pages/Heroes/Heroes';
+import Heroes, { heroesLoader } from './pages/Heroes/Heroes';
 import Layout from './hoc/Layout/Layout';
 import Search from './pages/Search/Search';
 import Register from './pages/Register/Register';
@@ -37,7 +37,7 @@ const router = createBrowserRouter(
       <Route path='/' element={<div>Home</div>} />
       <Route path='search' element={<Search />} />
       <Route path='heroes'>
-        <Route path='' element={<Heroes />} />
+        <Route path='' element={<Heroes />} loader={heroesLoader} />
         <Route path=':id' element={<HeroById />} loader={loader} />
       </Route>
       <Route path='register' element={<Register />} />

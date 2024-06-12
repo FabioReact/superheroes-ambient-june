@@ -1,26 +1,19 @@
-import { useState } from 'react';
 import { getHeroesByLetter } from '@api/heroes';
-import { Loader } from '../../components/Loader/Loader';
 import HeroCard from '../../components/HeroCard/HeroCard';
 import LetterListElement from './LetterListElement';
 import { arrayOfLetters } from './utils';
-import { useQuery } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
+import { Link, LoaderFunctionArgs, useLoaderData, useSearchParams } from 'react-router-dom';
+import { Hero } from 'types/hero';
 
 const Heroes = () => {
-  const [selectedLetter, setSelectedLetter] = useState('a');
-  const {
-    data: heroes,
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ['getHeroesByLetter', selectedLetter],
-    queryFn: () => getHeroesByLetter(selectedLetter),
-  });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialLetter = searchParams.get('startBy') || 'a';
+  const heroes = useLoaderData() as Hero[];
 
   const onSelectLetter = async (letter: string) => {
-    setSelectedLetter(letter);
-    refetch();
+    setSearchParams({
+      startBy: letter,
+    });
   };
 
   return (
@@ -30,13 +23,12 @@ const Heroes = () => {
         {arrayOfLetters.map((letter) => (
           <LetterListElement
             key={letter}
-            selected={letter === selectedLetter}
+            selected={letter === initialLetter}
             onClick={() => onSelectLetter(letter)}>
             {letter}
           </LetterListElement>
         ))}
       </ul>
-      {isLoading && <Loader />}
       <ul className='flex flex-wrap justify-center gap-4'>
         {heroes?.map((hero) => (
           <li key={hero.id}>
@@ -48,6 +40,12 @@ const Heroes = () => {
       </ul>
     </section>
   );
+};
+
+export const heroesLoader = async ({ params, request }: LoaderFunctionArgs) => {
+  const url = new URL(request.url);
+  const searchTerm = url.searchParams.get('startBy') || 'a';
+  return getHeroesByLetter(searchTerm);
 };
 
 export default Heroes;
