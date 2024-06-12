@@ -8,6 +8,7 @@ import Login from '@pages/Login/Login';
 import Profile from '@pages/Profile/Profile';
 import PrivateRoute from './hoc/PrivateRoute/PrivateRoute';
 import Logout from '@components/Logout/Logout';
+import HeroById from '@pages/HeroById/HeroById';
 
 // const router = createBrowserRouter([
 //   {
@@ -30,7 +31,10 @@ const router = createBrowserRouter(
     <Route element={<Layout />}>
       <Route path='/' element={<div>Home</div>} />
       <Route path='search' element={<Search />} />
-      <Route path='heroes' element={<Heroes />} />
+      <Route path='heroes'>
+        <Route path='' element={<Heroes />} />
+        <Route path=':id' element={<HeroById />} />
+      </Route>
       <Route path='register' element={<Register />} />
       <Route path='login' element={<Login />} />
       <Route path='logout' element={<Logout />} />

@@ -6,6 +6,13 @@ const getHeroes = async (): Promise<Hero[]> => {
   return data;
 };
 
+const getHeroById = async (id: string): Promise<Hero> => {
+  const response = await fetch(`http://localhost:4000/heroes/${id}`);
+  if (response.status !== 200) throw new Error('No Hero');
+  const data = await response.json();
+  return data;
+};
+
 const getHeroesByLetter = async (
   letter: string,
   options?: {
@@ -50,4 +57,4 @@ const getHeroesByFilters = async (filters: {
 
 // http://localhost:4000/heroes?name_like=man&powerstats.intelligence_gte=50
 
-export { getHeroes, getHeroesByLetter, getHeroesByName, getHeroesByFilters };
+export { getHeroes, getHeroesByLetter, getHeroesByName, getHeroesByFilters, getHeroById };
