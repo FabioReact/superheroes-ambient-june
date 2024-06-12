@@ -9,6 +9,7 @@ import Profile from '@pages/Profile/Profile';
 import PrivateRoute from './hoc/PrivateRoute/PrivateRoute';
 import Logout from '@components/Logout/Logout';
 import HeroById from '@pages/HeroById/HeroById';
+import Counter from '@pages/Counter/Counter';
 
 // const router = createBrowserRouter([
 //   {
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
         <Route path='profile' element={<Profile />} />
       </Route>
       <Route path='useeffect' element={<UseEffectComponent />} />
+      <Route path='counter' element={<Counter />} />
       <Route path='*' element={<div>Oops, you took a wrong turn...</div>} />
     </Route>,
   ),

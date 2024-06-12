@@ -1,13 +1,7 @@
-import { useState } from 'react';
+import { useCounter } from '../../hooks/useCounter';
 
 const Counter = () => {
-  const [counter, setCounter] = useState(0);
-  const increment = () => {
-    setCounter((counter) => counter + 1);
-  };
-  const decrement = () => {
-    setCounter((counter) => counter - 1);
-  };
+  const { counter, increment, decrement, reset } = useCounter(5);
 
   return (
     <section>
@@ -15,6 +9,7 @@ const Counter = () => {
       <p>Value of counter: {counter}</p>
       <button onClick={increment}>Increment</button>
       <button onClick={decrement}>Decrement</button>
+      <button onClick={reset}>Reset</button>
     </section>
   );
 };
