@@ -14,6 +14,7 @@ import AddHero from '@pages/AddHero/AddHero';
 
 const Counter = lazy(() => import('@pages/Counter/Counter'));
 const UseEffectComponent = lazy(() => import('@pages/UseEffect/UseEffect'));
+const Optimizations = lazy(() => import('@pages/Optimizations/Optimizations'));
 // import { UseEffectComponent } from './pages/UseEffect/UseEffect';
 // const router = createBrowserRouter([
 //   {
@@ -49,6 +50,7 @@ const router = createBrowserRouter(
       </Route>
       <Route path='useeffect' element={<UseEffectComponent />} />
       <Route path='counter' element={<Counter />} />
+      <Route path='optimizations' element={<Optimizations />} />
       <Route path='*' element={<div>Oops, you took a wrong turn...</div>} />
     </Route>,
   ),

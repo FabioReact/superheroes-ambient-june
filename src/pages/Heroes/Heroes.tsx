@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getHeroesByLetter } from '@api/heroes';
-import { Loader } from '../../components/Loader/Loader';
-import HeroCard from '../../components/HeroCard/HeroCard';
+import { Loader } from '@components/Loader/Loader';
+import HeroCard from '@components/HeroCard/HeroCard';
 import LetterListElement from './LetterListElement';
 import { arrayOfLetters } from './utils';
 import { useQuery } from '@tanstack/react-query';
