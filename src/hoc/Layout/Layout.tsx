@@ -16,6 +16,7 @@ const Layout = () => {
     { name: 'Home', path: '/', visibility: LinkVisibility.PUBLIC },
     { name: 'Search', path: '/search', visibility: LinkVisibility.PUBLIC },
     { name: 'Heroes', path: '/heroes', visibility: LinkVisibility.PUBLIC },
+    { name: 'Add Hero', path: '/add-hero', visibility: LinkVisibility.AUTHENTICATED },
     { name: 'Profile', path: '/profile', visibility: LinkVisibility.AUTHENTICATED },
     { name: 'Register', path: '/register', visibility: LinkVisibility.NOT_AUTHENTICATED },
     { name: 'Login', path: '/login', visibility: LinkVisibility.NOT_AUTHENTICATED },

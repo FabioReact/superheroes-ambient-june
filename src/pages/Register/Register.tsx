@@ -1,6 +1,7 @@
 import { registerUser } from '@api/auth';
 import { useAuthContext } from '@context/auth-context';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
@@ -25,10 +26,14 @@ const Register = () => {
     formState: { errors },
   } = useForm<Inputs>({ resolver: zodResolver(schema) });
   const { onAuthenticate } = useAuthContext();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { mutateAsync } = useMutation({
+    mutationFn: (params: { email: string; password: string }) =>
+      registerUser(params.email, params.password),
+  });
 
   const onSubmitHandler: SubmitHandler<Inputs> = async ({ email, password }) => {
-    const data = await registerUser(email, password);
+    const data = await mutateAsync({ email, password });
     onAuthenticate(data.accessToken, data.user);
     navigate('/profile');
   };

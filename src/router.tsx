@@ -10,6 +10,7 @@ import PrivateRoute from './hoc/PrivateRoute/PrivateRoute';
 import Logout from '@components/Logout/Logout';
 import HeroById from '@pages/HeroById/HeroById';
 import Counter from '@pages/Counter/Counter';
+import AddHero from '@pages/AddHero/AddHero';
 
 // const router = createBrowserRouter([
 //   {
@@ -41,6 +42,7 @@ const router = createBrowserRouter(
       <Route path='logout' element={<Logout />} />
       <Route element={<PrivateRoute />}>
         <Route path='profile' element={<Profile />} />
+        <Route path='add-hero' element={<AddHero />} />
       </Route>
       <Route path='useeffect' element={<UseEffectComponent />} />
       <Route path='counter' element={<Counter />} />
