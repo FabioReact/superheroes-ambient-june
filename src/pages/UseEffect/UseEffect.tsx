@@ -33,4 +33,4 @@ const UseEffectComponent = () => {
   );
 };
 
-export { UseEffectComponent };
+export default UseEffectComponent;

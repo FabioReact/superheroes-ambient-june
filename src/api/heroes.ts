@@ -1,9 +1,19 @@
+import axios from 'axios';
 import { Hero } from '../types/hero';
 
 const getHeroes = async (): Promise<Hero[]> => {
   const response = await fetch('http://localhost:4000/heroes');
   const data = await response.json();
   return data;
+};
+
+export type AddHeroParams = {
+  name: string;
+};
+
+const addHero = async (data: AddHeroParams): Promise<Hero> => {
+  const response = await axios.post('http://localhost:4000/heroes', data);
+  return response.data;
 };
 
 const getHeroById = async (id: string): Promise<Hero> => {
@@ -55,6 +65,4 @@ const getHeroesByFilters = async (filters: {
   return response.json();
 };
 
-// http://localhost:4000/heroes?name_like=man&powerstats.intelligence_gte=50
-
-export { getHeroes, getHeroesByLetter, getHeroesByName, getHeroesByFilters, getHeroById };
+export { addHero, getHeroes, getHeroesByLetter, getHeroesByName, getHeroesByFilters, getHeroById };

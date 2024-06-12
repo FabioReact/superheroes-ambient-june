@@ -1,17 +1,20 @@
+/* eslint-disable react-refresh/only-export-components */
+import { lazy } from 'react';
 import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import Heroes from './pages/Heroes/Heroes';
 import Layout from './hoc/Layout/Layout';
 import Search from './pages/Search/Search';
-import { UseEffectComponent } from './pages/UseEffect/UseEffect';
 import Register from './pages/Register/Register';
 import Login from '@pages/Login/Login';
 import Profile from '@pages/Profile/Profile';
 import PrivateRoute from './hoc/PrivateRoute/PrivateRoute';
 import Logout from '@components/Logout/Logout';
 import HeroById from '@pages/HeroById/HeroById';
-import Counter from '@pages/Counter/Counter';
 import AddHero from '@pages/AddHero/AddHero';
 
+const Counter = lazy(() => import('@pages/Counter/Counter'));
+const UseEffectComponent = lazy(() => import('@pages/UseEffect/UseEffect'));
+// import { UseEffectComponent } from './pages/UseEffect/UseEffect';
 // const router = createBrowserRouter([
 //   {
 //     element: <Layout />,

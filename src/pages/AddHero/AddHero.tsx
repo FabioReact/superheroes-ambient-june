@@ -1,3 +1,5 @@
+import { AddHeroParams, addHero } from '@api/heroes';
+import { useMutation } from '@tanstack/react-query';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -9,9 +11,12 @@ type Inputs = z.infer<typeof schema>;
 
 const AddHero = () => {
   const { register, handleSubmit } = useForm<Inputs>();
+  const { mutate, data, isPending, isSuccess } = useMutation({
+    mutationFn: (params: AddHeroParams) => addHero(params),
+  });
 
-  const onSubmitHandler: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+  const onSubmitHandler: SubmitHandler<Inputs> = (formData) => {
+    mutate(formData);
   };
 
   return (
@@ -23,7 +28,10 @@ const AddHero = () => {
           <input type='text' id='name' {...register('name')} />
         </fieldset>
         <button>Submit</button>
+        {isPending && <p>Adding Hero...</p>}
+        {isSuccess && <pre>{JSON.stringify(data, null, 2)}</pre>}
       </form>
+      <div></div>
     </section>
   );
 };
