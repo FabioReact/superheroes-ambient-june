@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-const BASE_URL = 'http://localhost:4000';
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 type RegisterUserBody = {
   email: string;
@@ -27,6 +27,7 @@ const registerUser = async (email: string, password: string) => {
 };
 
 const loginUser = async (email: string, password: string) => {
+  console.log(BASE_URL)
   const response = await axios.post<RegisterUserBody, AxiosResponse<RegisterUserRepsonse>>(
     `${BASE_URL}/login`,
     {
