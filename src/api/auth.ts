@@ -1,5 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 
+const BASE_URL = 'http://localhost:4000';
+
 type RegisterUserBody = {
   email: string;
   password: string;
@@ -15,7 +17,7 @@ type RegisterUserRepsonse = {
 
 const registerUser = async (email: string, password: string) => {
   const response = await axios.post<RegisterUserBody, AxiosResponse<RegisterUserRepsonse>>(
-    'http://localhost:4000/register',
+    `${BASE_URL}/register`,
     {
       email, // equivalent à email: email
       password,
@@ -26,7 +28,7 @@ const registerUser = async (email: string, password: string) => {
 
 const loginUser = async (email: string, password: string) => {
   const response = await axios.post<RegisterUserBody, AxiosResponse<RegisterUserRepsonse>>(
-    'http://localhost:4000/login',
+    `${BASE_URL}/login`,
     {
       email,
       password,

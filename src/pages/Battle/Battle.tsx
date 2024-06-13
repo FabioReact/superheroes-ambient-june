@@ -32,7 +32,7 @@ const Battle = () => {
           <button onClick={onReset}>Reset</button>
         </>
       )}
-      {(!winner) && (
+      {!winner && (
         <div className='flex justify-center gap-40'>
           <SelectPlayer label='first' onSelectHero={setFirst} />
           <SelectPlayer label='second' onSelectHero={setSecond} />
