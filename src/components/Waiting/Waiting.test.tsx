@@ -7,16 +7,34 @@ import '@testing-library/jest-dom';
 
 describe('Waiting Component', () => {
   it('should render Loader if component is loading is true', () => {
-    // Il faut que loading = true
-    render(<Waiting loading={true} />);
+    render(
+      <Waiting loading={true}>
+        <h1>Hello World</h1>
+      </Waiting>,
+    );
     const loader = screen.getByRole('status');
+    const title = screen.queryByRole('heading');
     expect(loader).toBeInTheDocument();
+    expect(title).not.toBeInTheDocument();
+  });
+
+  it('should not render Loader if loading state is false', () => {
+    render(
+      <Waiting loading={false}>
+        <h1>Hello World</h1>
+      </Waiting>,
+    );
+    const loader = screen.queryByRole('status');
+    expect(loader).not.toBeInTheDocument();
   });
 
   it('should render component if loading state is false', () => {
-    // Il faut que loading = false
-    render(<Waiting loading={false} />);
-    const loader = screen.queryByRole('status');
-    expect(loader).not.toBeInTheDocument();
+    render(
+      <Waiting loading={false}>
+        <h1>Hello World</h1>
+      </Waiting>,
+    );
+    const title = screen.getByRole('heading');
+    expect(title).toBeInTheDocument();
   });
 });

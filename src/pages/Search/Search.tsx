@@ -4,6 +4,7 @@ import { Hero } from '../../types/hero';
 import HeroCard from '../../components/HeroCard/HeroCard';
 import { Loader } from '../../components/Loader/Loader';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import Waiting from '@components/Waiting/Waiting';
 
 type Inputs = {
   heroName: string;
@@ -58,7 +59,11 @@ const Search = () => {
         <button>Search</button>
         {isError && <p className='text-red-500'>An error happened while fetching</p>}
         <div className='flex justify-center flex-wrap gap-4'>
-          {loading ? <Loader /> : heroes.map((hero) => <HeroCard key={hero.id} hero={hero} />)}
+          <Waiting loading={loading}>
+            {heroes.map((hero) => (
+              <HeroCard key={hero.id} hero={hero} />
+            ))}
+          </Waiting>
         </div>
       </form>
     </section>
