@@ -1,15 +1,14 @@
-import { useAuthContext } from '@context/auth-context';
 import { useAppSelector } from '../../redux/hooks';
 import HeroCard from '@components/HeroCard/HeroCard';
 
 const Profile = () => {
-  const context = useAuthContext();
+  const auth = useAppSelector((state) => state.auth);
   const favoritesHeroes = useAppSelector((state) => state.heroManager);
 
   return (
     <section>
       <h1>Profile</h1>
-      <pre>{JSON.stringify(context, null, 2)}</pre>
+      <pre>{JSON.stringify(auth, null, 2)}</pre>
       {favoritesHeroes && (
         <ul className='flex justify-center flex-wrap gap-4'>
           {favoritesHeroes.map((hero) => (

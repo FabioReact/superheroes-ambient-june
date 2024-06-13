@@ -1,10 +1,11 @@
 import { registerUser } from '@api/auth';
-import { useAuthContext } from '@context/auth-context';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
+import { useAppDispatch } from '../../redux/hooks';
+import { onAuthenticate } from '../../redux/reducers/authSlice';
 
 const schema = z
   .object({
@@ -25,7 +26,7 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({ resolver: zodResolver(schema) });
-  const { onAuthenticate } = useAuthContext();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { mutateAsync } = useMutation({
     mutationFn: (params: { email: string; password: string }) =>
@@ -34,7 +35,12 @@ const Register = () => {
 
   const onSubmitHandler: SubmitHandler<Inputs> = async ({ email, password }) => {
     const data = await mutateAsync({ email, password });
-    onAuthenticate(data.accessToken, data.user);
+    dispatch(
+      onAuthenticate({
+        accessToken: data.accessToken,
+        user: data.user,
+      }),
+    );
     navigate('/profile');
   };
 

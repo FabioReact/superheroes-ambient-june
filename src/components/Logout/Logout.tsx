@@ -1,9 +1,10 @@
-import { useAuthContext } from '@context/auth-context';
 import { Navigate } from 'react-router-dom';
+import { useAppDispatch } from '../../redux/hooks';
+import { onLogout } from '../../redux/reducers/authSlice';
 
 const Logout = () => {
-  const { onLogout } = useAuthContext();
-  onLogout();
+  const dispatch = useAppDispatch();
+  dispatch(onLogout());
   return <Navigate to='/login' />;
 };
 

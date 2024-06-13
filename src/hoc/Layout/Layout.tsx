@@ -1,5 +1,5 @@
-import { useAuthContext } from '@context/auth-context';
 import { NavLink, Outlet } from 'react-router-dom';
+import { useAppSelector } from '../../redux/hooks';
 
 enum LinkVisibility {
   PUBLIC = 'PUBLIC',
@@ -8,7 +8,7 @@ enum LinkVisibility {
 }
 
 const Layout = () => {
-  const { connected } = useAuthContext();
+  const connected = useAppSelector((state) => state.auth.connected);
   const getActiveClassName = ({ isActive }: { isActive: boolean }) =>
     isActive ? 'text-blue-600' : '';
 
