@@ -6,17 +6,19 @@ import LetterListElement from './LetterListElement';
 import { arrayOfLetters } from './utils';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
+import { useGetHeroesByLetterQuery } from '../../redux/services/heroesApi';
 
 const Heroes = () => {
   const [selectedLetter, setSelectedLetter] = useState('a');
-  const {
-    data: heroes,
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ['getHeroesByLetter', selectedLetter],
-    queryFn: () => getHeroesByLetter(selectedLetter),
-  });
+  // const {
+  //   data: heroes,
+  //   isLoading,
+  //   refetch,
+  // } = useQuery({
+  //   queryKey: ['getHeroesByLetter', selectedLetter],
+  //   queryFn: () => getHeroesByLetter(selectedLetter),
+  // });
+  const { isFetching, data: heroes, refetch } = useGetHeroesByLetterQuery(selectedLetter);
 
   const onSelectLetter = async (letter: string) => {
     setSelectedLetter(letter);
@@ -36,16 +38,18 @@ const Heroes = () => {
           </LetterListElement>
         ))}
       </ul>
-      {isLoading && <Loader />}
-      <ul className='flex flex-wrap justify-center gap-4'>
-        {heroes?.map((hero) => (
-          <li key={hero.id}>
-            <Link to={`${hero.id}`}>
-              <HeroCard hero={hero} />
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {isFetching && <Loader />}
+      {!isFetching && (
+        <ul className='flex flex-wrap justify-center gap-4'>
+          {heroes?.map((hero) => (
+            <li key={hero.id}>
+              <Link to={`${hero.id}`}>
+                <HeroCard hero={hero} />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </section>
   );
 };
