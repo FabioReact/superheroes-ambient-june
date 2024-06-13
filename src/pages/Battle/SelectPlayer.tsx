@@ -13,7 +13,7 @@ const SelectPlayer = ({ label, onSelectHero }: SelectPlayerProps) => {
   const [selected, setSelected] = useState<Hero | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const { data: heroes, refetch } = useQuery({
-    queryKey: ['getHeroesByName', inputRef.current?.value],
+    queryKey: ['getHeroesByName', label, inputRef.current?.value],
     queryFn: () => getHeroesByName(inputRef.current?.value || ''),
     enabled: !!inputRef.current?.value,
   });
