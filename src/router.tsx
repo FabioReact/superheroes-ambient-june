@@ -11,6 +11,8 @@ import PrivateRoute from './hoc/PrivateRoute/PrivateRoute';
 import Logout from '@components/Logout/Logout';
 import HeroById from '@pages/HeroById/HeroById';
 import AddHero from '@pages/AddHero/AddHero';
+import Dashboard from '@pages/DashBoard/Dashboard';
+import Battle from '@pages/Battle/Battle';
 
 const Counter = lazy(() => import('@pages/Counter/Counter'));
 const UseEffectComponent = lazy(() => import('@pages/UseEffect/UseEffect'));
@@ -41,6 +43,7 @@ const router = createBrowserRouter(
         <Route path='' element={<Heroes />} />
         <Route path=':id' element={<HeroById />} />
       </Route>
+      <Route path='battle' element={<Battle />} />
       <Route path='register' element={<Register />} />
       <Route path='login' element={<Login />} />
       <Route path='logout' element={<Logout />} />
@@ -51,6 +54,7 @@ const router = createBrowserRouter(
       <Route path='useeffect' element={<UseEffectComponent />} />
       <Route path='counter' element={<Counter />} />
       <Route path='optimizations' element={<Optimizations />} />
+      <Route path='dashboard' element={<Dashboard />} />
       <Route path='*' element={<div>Oops, you took a wrong turn...</div>} />
     </Route>,
   ),
